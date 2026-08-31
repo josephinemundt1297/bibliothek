@@ -9,5 +9,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs"
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josephinemundt1297/bibliothek.git"
+  },
+  "bugs": {
+    "url": "https://github.com/josephinemundt1297/bibliothek/issues"
+  },
+  "homepage": "https://github.com/josephinemundt1297/bibliothek#readme"
 }
