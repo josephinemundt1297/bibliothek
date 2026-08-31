@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./database/connectDB.js";
 import errorHandler from "./middlewares/errorHandler.js";
+import bookRoutes from "./routes/bookRoutes.js";
 
 dotenv.config();
 
@@ -17,6 +18,8 @@ app.get("/", (req, res) => {
     message: "Library API is running",
   });
 });
+
+app.use("/books", bookRoutes);
 
 app.use((req, res, next) => {
   const error = new Error(`Route ${req.method} ${req.originalUrl} not found`);
