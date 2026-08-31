@@ -2,7 +2,7 @@
 
 Eine einfache NoSQL Mini-API fuer eine Bibliothek. Die API wird mit Node.js, Express, MongoDB und Mongoose gebaut und verwendet eine MVC-Struktur mit Models, Routes und Controllers.
 
-Mit der API koennen Buecher in der Datenbank erstellt, gelesen, aktualisiert und geloescht werden. Der zweite Projektbereich fuer Ausleihen (`/loans`) wird im Team separat ergaenzt.
+Mit der API koennen Buecher und Ausleihen in der Datenbank erstellt, gelesen, aktualisiert und geloescht werden.
 
 ## Team
 
@@ -180,6 +180,134 @@ Erfolgreiche Antwort:
 Status: 204 No Content
 ```
 
+### Alle Ausleihen lesen
+
+```http
+GET /loans
+```
+
+Beispiel-Antwort:
+
+```json
+{
+  "count": 1,
+  "data": [
+    {
+      "_id": "66d4567890abcdef12345679",
+      "bookId": "66d4567890abcdef12345678",
+      "borrowerName": "Dilek",
+      "borrowedAt": "2026-08-31T10:00:00.000Z",
+      "isReturned": false
+    }
+  ]
+}
+```
+
+### Einzelne Ausleihe lesen
+
+```http
+GET /loans/:id
+```
+
+Beispiel-Antwort:
+
+```json
+{
+  "_id": "66d4567890abcdef12345679",
+  "bookId": "66d4567890abcdef12345678",
+  "borrowerName": "Dilek",
+  "borrowedAt": "2026-08-31T10:00:00.000Z",
+  "isReturned": false
+}
+```
+
+### Neue Ausleihe erstellen
+
+```http
+POST /loans
+Content-Type: application/json
+```
+
+Beispiel-Anfrage:
+
+```json
+{
+  "bookId": "66d4567890abcdef12345678",
+  "borrowerName": "Dilek"
+}
+```
+
+Beispiel-Antwort:
+
+```json
+{
+  "_id": "66d4567890abcdef12345679",
+  "bookId": "66d4567890abcdef12345678",
+  "borrowerName": "Dilek",
+  "borrowedAt": "2026-08-31T10:00:00.000Z",
+  "isReturned": false
+}
+```
+
+### Ausleihe aktualisieren
+
+```http
+PUT /loans/:id
+Content-Type: application/json
+```
+
+Beispiel-Anfrage:
+
+```json
+{
+  "bookId": "66d4567890abcdef12345678",
+  "borrowerName": "Dilek Yilmaz",
+  "isReturned": false
+}
+```
+
+Beispiel-Antwort:
+
+```json
+{
+  "_id": "66d4567890abcdef12345679",
+  "bookId": "66d4567890abcdef12345678",
+  "borrowerName": "Dilek Yilmaz",
+  "borrowedAt": "2026-08-31T10:00:00.000Z",
+  "isReturned": false
+}
+```
+
+### Ausleihe als zurueckgegeben markieren
+
+```http
+PUT /loans/:id/return
+```
+
+Beispiel-Antwort:
+
+```json
+{
+  "_id": "66d4567890abcdef12345679",
+  "bookId": "66d4567890abcdef12345678",
+  "borrowerName": "Dilek",
+  "borrowedAt": "2026-08-31T10:00:00.000Z",
+  "isReturned": true
+}
+```
+
+### Ausleihe loeschen
+
+```http
+DELETE /loans/:id
+```
+
+Erfolgreiche Antwort:
+
+```txt
+Status: 204 No Content
+```
+
 ## Fehlerbeispiele
 
 Ungueltige ID:
@@ -191,11 +319,29 @@ Ungueltige ID:
 }
 ```
 
+Ungueltige Ausleihe-ID:
+
+```json
+{
+  "status": 400,
+  "error": "Invalid loan id"
+}
+```
+
 Buch nicht gefunden:
 
 ```json
 {
   "status": 404,
   "error": "Book not found"
+}
+```
+
+Ausleihe nicht gefunden:
+
+```json
+{
+  "status": 404,
+  "error": "Loan not found"
 }
 ```

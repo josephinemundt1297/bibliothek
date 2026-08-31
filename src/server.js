@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import connectDB from "./database/connectDB.js";
 import errorHandler from "./middlewares/errorHandler.js";
 import bookRoutes from "./routes/bookRoutes.js";
+import loanRoutes from "./routes/loanRoutes.js";
 
 // Holt die Werte aus der .env Datei, z.B. PORT und MONGODB_URI.
 dotenv.config();
@@ -27,6 +28,9 @@ app.get("/", (req, res) => {
 
 // Alles, was mit /books startet, wird an die Book-Routes weitergegeben.
 app.use("/books", bookRoutes);
+
+// Alles, was mit /loans startet, wird an die Loan-Routes weitergegeben.
+app.use("/loans", loanRoutes);
 
 // Wenn keine Route passt, bauen wir hier einen 404-Fehler.
 app.use((req, res, next) => {
