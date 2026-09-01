@@ -22,8 +22,10 @@ Mit der API koennen Buecher und Ausleihen in der Datenbank erstellt, gelesen, ak
 
 ```bash
 npm install
-npm run dev
+npm start
 ```
+
+Fuer die Entwicklung kann alternativ `npm run dev` verwendet werden. Dann startet der Server mit nodemon und laedt bei Codeaenderungen automatisch neu.
 
 Die API laeuft standardmaessig unter:
 
